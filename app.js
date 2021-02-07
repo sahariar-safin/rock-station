@@ -4,6 +4,8 @@ const handleSongs = () => {
         .then(res => res.json())
         .then(info => {
             const searchResult = document.getElementById('searchResult');
+            document.getElementById('searchResult').innerHTML = ' ';
+            document.getElementById('songLyrics').innerHTML = " ";
             info.data.forEach(element => {
                 const resultOne = document.createElement('div');
                 resultOne.className = 'single-result row align-items-center my-3 p-3';
