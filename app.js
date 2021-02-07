@@ -20,7 +20,13 @@ const handleSongs = () => {
             `;
                 searchResult.appendChild(resultOne);
             });
-        });
+        })
+        .catch(error => {
+            const searchResult = document.getElementById('searchResult');
+            const invalid = document.createElement('h1');
+            invalid.innerHTML = `Search result not found.... Try again with another song name...`;
+            searchResult.appendChild(invalid);
+        })
 }
 const handleLyrics = (artist, title) => {
     fetch(`https://api.lyrics.ovh/v1/${ artist }/${ title }`)
