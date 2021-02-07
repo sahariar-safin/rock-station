@@ -5,7 +5,6 @@ const handleSongs = () => {
         .then(info => {
             const searchResult = document.getElementById('searchResult');
             info.data.forEach(element => {
-                console.log(element.album.title);
                 const resultOne = document.createElement('div');
                 resultOne.className = 'single-result row align-items-center my-3 p-3';
                 resultOne.innerHTML = `
@@ -14,13 +13,21 @@ const handleSongs = () => {
                 <p class="author lead">Album by <span>${element.album.title}</span></p>
             </div>
             <div class="col-md-3 text-md-right text-center">
-                <button class="btn btn-success">Get Lyrics</button>
+                <button onclick="handleLyrics('${element.artist.name}','${element.title}')" class="btn btn-success">Get Lyrics</button>
             </div>
             `;
             searchResult.appendChild(resultOne);
             });
-        })
+        });
 }
-// const handleLyrics = () =>{
-//     fetch(`https://api.lyrics.ovh/v1/:artist/:title`)
-// }
+const handleLyrics = (artist, title) =>{
+    fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`)
+    .then(res => res.json())
+    .then(data => {
+        const songLyrics = document.getElementById('songLyrics');
+        document.getElementById('songLyrics').innerHTML = " ";
+        const lyric = document.createElement('p');
+        lyric.innerText = `${data.lyrics}`;
+        songLyrics.appendChild(lyric);
+    });
+}
