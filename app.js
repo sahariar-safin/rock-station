@@ -2,6 +2,7 @@ const handleSongs = () => {
     const songName = document.getElementById('songName').value;
     document.getElementById('searchResult').innerHTML = ' ';
     document.getElementById('songLyrics').innerHTML = " ";
+    document.getElementById('errorMassage').innerHTML = ' ';
     fetch(`https://api.lyrics.ovh/suggest/${ songName }`)
         .then(res => res.json())
         .then(info => {
@@ -23,9 +24,11 @@ const handleSongs = () => {
             `;
                 searchResult.appendChild(resultOne);
             });
-        });
+        })
+        .catch(error => errorMassage(`We can't load this lyrics right now..! Please try again after some time!`));
 }
 const handleLyrics = (artist, title) => {
+    document.getElementById('errorMassage').innerHTML = ' ';
     fetch(`https://api.lyrics.ovh/v1/${ artist }/${ title }`)
         .then(res => res.json())
         .then(data => {
@@ -34,5 +37,10 @@ const handleLyrics = (artist, title) => {
             const lyric = document.createElement('p');
             lyric.innerText = `${ data.lyrics }`;
             songLyrics.appendChild(lyric);
-        });
+        })
+        .catch(error => errorMassage(`We can't load this lyrics right now..! Please try again after some time!`));
 }
+const errorMassage = (error) => {
+    const displayError = document.getElementById('errorMassage');
+    displayError.innerText = error;
+};
