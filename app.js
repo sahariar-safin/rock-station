@@ -25,7 +25,7 @@ const handleSongs = () => {
                 searchResult.appendChild(resultOne);
             });
         })
-        .catch(error => errorMassage(`We can't load this lyrics right now..! Please try again after some time!`));
+        .catch(error => errorMassage(`We can't load this songs right now..! Please try again after some time!`));
 }
 const handleLyrics = (artist, title) => {
     document.getElementById('errorMassage').innerHTML = ' ';
