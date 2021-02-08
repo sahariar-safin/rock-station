@@ -6,16 +6,16 @@ const handleSongs = () => {
         .then(res => res.json())
         .then(info => {
             const searchResult = document.getElementById('searchResult');
-            info.data.forEach(element => {
+            info.data.forEach(song => {
                 const resultOne = document.createElement('div');
                 resultOne.className = 'single-result row align-items-center my-3 p-3';
                 resultOne.innerHTML = `
             <div class="col-md-9">
-                <h3 class="lyrics-name">${ element.title }</h3>
-                <p class="author lead">Album by <span>${ element.artist.name }</span></p>
+                <h3 class="lyrics-name">${ song.title }</h3>
+                <p class="author lead">Album by <span>${ song.artist.name }</span></p>
             </div>
             <div class="col-md-3 text-md-right text-center">
-                <button onclick="handleLyrics('${ element.artist.name }','${ element.title }')" class="btn btn-success">Get Lyrics</button>
+                <button onclick="handleLyrics('${ song.artist.name }','${ song.title }')" class="btn btn-success">Get Lyrics</button>
             </div>
             `;
                 searchResult.appendChild(resultOne);
