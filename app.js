@@ -9,13 +9,15 @@ const handleSongs = () => {
             const searchResult = document.getElementById('searchResult');
             info.data.forEach(song => {
                 const resultOne = document.createElement('div');
+                const songPreview = song.preview.split(':')[0] + "s:" + song.preview.split(':')[1];
+                console.log(songPreview);
                 resultOne.className = 'single-result row align-items-center my-3 p-3';
                 resultOne.innerHTML = `
             <div class="col-md-9">
                 <h3 class="lyrics-name">${ song.title }</h3>
                 <p class="author lead">Album by <span>${ song.artist.name }</span></p>
                 <audio controls>
-                <source src="${ song.preview }" type="audio/mp3">
+                <source src="${ songPreview }" type="audio/mp3">
                 </audio>
             </div>
             <div class="col-md-3 text-md-right text-center">
