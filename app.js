@@ -12,7 +12,7 @@ const handleSongs = () => {
                 resultOne.innerHTML = `
             <div class="col-md-9">
                 <h3 class="lyrics-name">${ element.title }</h3>
-                <p class="author lead">Album by <span>${ element.album.title }</span></p>
+                <p class="author lead">Album by <span>${ element.artist.name }</span></p>
             </div>
             <div class="col-md-3 text-md-right text-center">
                 <button onclick="handleLyrics('${ element.artist.name }','${ element.title }')" class="btn btn-success">Get Lyrics</button>
