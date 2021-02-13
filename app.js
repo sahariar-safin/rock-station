@@ -3,6 +3,7 @@ const handleSongs = () => {
     document.getElementById('searchResult').innerHTML = ' ';
     document.getElementById('songLyrics').innerHTML = " ";
     document.getElementById('errorMassage').innerHTML = ' ';
+    handleSpinner();
     fetch(`https://api.lyrics.ovh/suggest/${ songName }`)
         .then(res => res.json())
         .then(info => {
@@ -10,7 +11,6 @@ const handleSongs = () => {
             info.data.forEach(song => {
                 const resultOne = document.createElement('div');
                 const songPreview = song.preview.split(':')[0] + "s:" + song.preview.split(':')[1];
-                console.log(songPreview);
                 resultOne.className = 'single-result row align-items-center my-3 p-3';
                 resultOne.innerHTML = `
             <div class="col-md-9">
@@ -25,9 +25,11 @@ const handleSongs = () => {
             </div>
             `;
                 searchResult.appendChild(resultOne);
+                handleSpinner();
             });
         })
         .catch(error => errorMassage(`We can't load this songs right now..! Please try again after some time!`));
+
 }
 const handleLyrics = (artist, title) => {
     document.getElementById('errorMassage').innerHTML = ' ';
@@ -46,3 +48,14 @@ const errorMassage = (error) => {
     const displayError = document.getElementById('errorMassage');
     displayError.innerText = error;
 };
+
+const handleSpinner = () => {
+    const spinner = document.getElementById('spinner');
+    spinner.classList.toggle("d-none");
+}
+
+document.getElementById("songName").addEventListener("keyup", function (event) {
+    if (event.key == "Enter") {
+        document.getElementById("searchBtn").click();
+    }
+});
