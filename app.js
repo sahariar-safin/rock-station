@@ -29,18 +29,19 @@ const handleSongs = () => {
             });
         })
         .catch(error => errorMassage(`We can't load this songs right now..! Please try again after some time!`));
-
 }
 const handleLyrics = (artist, title) => {
     document.getElementById('errorMassage').innerHTML = ' ';
+    document.getElementById('songLyrics').innerHTML = " ";
+    handleSpinner();
     fetch(`https://api.lyrics.ovh/v1/${ artist }/${ title }`)
         .then(res => res.json())
         .then(data => {
             const songLyrics = document.getElementById('songLyrics');
-            document.getElementById('songLyrics').innerHTML = " ";
             const lyric = document.createElement('p');
             lyric.innerText = `${ data.lyrics }`;
             songLyrics.appendChild(lyric);
+            handleSpinner();
         })
         .catch(error => errorMassage(`We can't load this lyrics right now..! Please try again after some time!`));
 }
